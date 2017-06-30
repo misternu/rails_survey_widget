@@ -4,14 +4,24 @@ import PropTypes from 'prop-types'
 
 const SurveyEditor = props => {
   if (props.editing) {
-    let choices = props.survey.choices.map((choice, index) => {
+    let questions = props.survey.questions.map((question, qIndex) => {
+      let choices = question.choices.map((choice, cIndex) => {
+        return (
+          <div className="list-item" key={cIndex}>
+            <input autoFocus type="text"
+              value={choice}
+              onChange={event => {props.handleChoiceChange(event, qIndex, cIndex)}}
+            />
+            <button onClick={() => {props.handleDeleteChoice(qIndex, cIndex)}}>Delete</button>
+          </div>
+        )
+      })
       return (
-        <div className="list-item" key={index}>
-          <input autoFocus type="text"
-            value={choice}
-            onChange={event => {props.handleChoiceChange(event, index)}}
-          />
-          <button onClick={() => {props.handleDeleteChoice(index)}}>Delete</button>
+        <div className="question" key={qIndex}>
+          <textarea value={question.text} onChange={event => props.handleQuestionChange(event, qIndex)} />
+          <button onClick={() => {props.handleDeleteQuestion(qIndex)}}>Delete</button>
+          {choices}
+          <div className="list-item" onClick={() => {props.handleNewChoice(qIndex)}}>Add New Choice</div>
         </div>
       )
     })
@@ -24,12 +34,8 @@ const SurveyEditor = props => {
           />
           <button onClick={props.handleDeleteSurvey}>Delete</button>
         </h3>
-        <textarea
-          value={props.survey.question}
-          onChange={props.handleQuestionChange}
-        />
-        {choices}
-        <div className="list-item" onClick={props.handleNewChoice}>Add New Choice</div>
+        {questions}
+        <div className="list-item" onClick={props.handleNewQuestion}>Add New Question</div>
       </div>
     )
   } else {
