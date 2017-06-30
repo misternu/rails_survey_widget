@@ -1,4 +1,3 @@
-/* eslint no-console:0 */
 // This file is automatically compiled by Webpack, along with any other files
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
@@ -9,13 +8,21 @@
 
 // console.log('Hello World from Webpacker')
 
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
+import Main from './main'
+import SurveyData from './survey_data'
 
 document.addEventListener('DOMContentLoaded', () => {
+  // let sampleSurvey = new SurveyData(
+  //         'Favorite Fruit Survey',
+  //         'Which of the following is your favorite fruit?',
+  //         ["Apples", "Bananas", "Oranges"]
+  //       )
+  // let surveys = [sampleSurvey]
   ReactDOM.render(
-    <h1>Hello, world!</h1>,
+    <Main />,
     document.getElementById('root')
   );
 })

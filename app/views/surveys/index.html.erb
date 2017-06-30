@@ -1,7 +1,9 @@
-<h1>Welcome to the Rails Survey Widget</h1>
-
-Login status: <%= logged_in ? current_user.username : "Not logged in" %>
-
+<div><%= login_link %></div>
 <div>
-  <%= login_link %>
+  Login status:
+  <%= logged_in ?
+    "Logged in as #{current_user.username}" :
+    "Without login, your data will not be saved" %>
 </div>
+<br/>
+<div id="root"></div>
