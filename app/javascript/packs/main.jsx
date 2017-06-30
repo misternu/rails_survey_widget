@@ -32,29 +32,41 @@ class Main extends Component {
     })
   }
 
-  handleQuestionChange(event) {
+  handleNewQuestion() {
     this.changeSurveys(surveys => {
-      surveys[this.state.index].question = event.target.value
+      surveys[this.state.index].newQuestion()
     })
   }
 
-  handleChoiceChange(event, index) {
+  handleQuestionChange(event, index) {
     this.changeSurveys(surveys => {
-      surveys[this.state.index].choices[index] = event.target.value
+      surveys[this.state.index].questions[index].text = event.target.value
     })
   }
 
-  handleNewChoice() {
-    let number = this.state.surveyDatas[this.state.index].choices.length + 1
+  handleDeleteQuestion(index) {
+    this.changeSurveys(surveys => {
+      surveys[this.state.index].questions.splice(index, 1)
+    })
+  }
+
+  handleChoiceChange(event, qIndex, cIndex) {
+    this.changeSurveys(surveys => {
+      surveys[this.state.index].questions[qIndex].choices[cIndex] = event.target.value
+    })
+  }
+
+  handleNewChoice(index) {
+    let number = this.state.surveyDatas[this.state.index].questions[index].choices.length + 1
     let choiceString = 'choice ' + number.toString()
     this.changeSurveys(surveys => {
-      surveys[this.state.index].choices.push(choiceString)
+      surveys[this.state.index].questions[index].choices.push(choiceString)
     })
   }
 
-  handleDeleteChoice(index) {
+  handleDeleteChoice(qIndex, cIndex) {
     this.changeSurveys(surveys => {
-      surveys[this.state.index].choices.splice(index, 1)
+      surveys[this.state.index].questions[qIndex].choices.splice(cIndex, 1)
     })
   }
 
@@ -87,10 +99,12 @@ class Main extends Component {
           survey={this.state.surveyDatas[this.state.index]}
           handleNameChange={event => {this.handleNameChange(event)}}
           handleDeleteSurvey={event => {this.handleDeleteSurvey()}}
-          handleQuestionChange={event => {this.handleQuestionChange(event)}}
-          handleChoiceChange={(event, index) => {this.handleChoiceChange(event,index)}}
-          handleNewChoice={() => {this.handleNewChoice()}}
-          handleDeleteChoice={index => {this.handleDeleteChoice(index)}}
+          handleNewQuestion={event => {this.handleNewQuestion()}}
+          handleQuestionChange={(event, index) => {this.handleQuestionChange(event, index)}}
+          handleDeleteQuestion={(index) => {this.handleDeleteQuestion(index)}}
+          handleChoiceChange={(event, qIndex, cIndex) => {this.handleChoiceChange(event, qIndex, cIndex)}}
+          handleNewChoice={(index) => {this.handleNewChoice(index)}}
+          handleDeleteChoice={(qIndex, cIndex)=> {this.handleDeleteChoice(qIndex, cIndex)}}
         />
         <SurveyJSON
           editing={this.state.editing}
