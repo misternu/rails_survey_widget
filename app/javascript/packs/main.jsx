@@ -4,12 +4,13 @@ import PropTypes from 'prop-types'
 import SurveyData from './survey_data'
 import SurveyList from './survey_list'
 import SurveyEditor from './survey_editor'
+import SurveyJSON from './survey_json'
 
 class Main extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      surveyDatas: props.surveys,
+      surveyDatas: props.surveys || [],
       editing: false,
       index: 0
     }
@@ -58,6 +59,7 @@ class Main extends Component {
   }
 
   handleNewSurvey() {
+    this.setState({editing: true, index: (this.state.surveyDatas.length) })
     this.changeSurveys(surveys => {
       surveys.push(new SurveyData('New Survey'))
     })
@@ -89,6 +91,10 @@ class Main extends Component {
           handleChoiceChange={(event, index) => {this.handleChoiceChange(event,index)}}
           handleNewChoice={() => {this.handleNewChoice()}}
           handleDeleteChoice={index => {this.handleDeleteChoice(index)}}
+        />
+        <SurveyJSON
+          editing={this.state.editing}
+          survey={this.state.surveyDatas[this.state.index]}
         />
       </div>
     )

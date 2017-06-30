@@ -7,7 +7,7 @@ const SurveyEditor = props => {
     let choices = props.survey.choices.map((choice, index) => {
       return (
         <div className="list-item" key={index}>
-          <input type="text"
+          <input autoFocus type="text"
             value={choice}
             onChange={event => {props.handleChoiceChange(event, index)}}
           />
@@ -18,7 +18,7 @@ const SurveyEditor = props => {
     return (
       <div className='editor'>
         <h3>Editing
-          <input type="text"
+          <input autoFocus type="text"
             value={props.survey.name}
             onChange={props.handleNameChange}
           />

@@ -10,19 +10,19 @@
 
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import Main from './main'
 import SurveyData from './survey_data'
 
 document.addEventListener('DOMContentLoaded', () => {
-  let sampleSurvey = new SurveyData(
-          'Favorite Fruit Survey',
-          'Which of the following is your favorite fruit?',
-          ["Apples", "Bananas", "Oranges"]
-        )
-  let surveys = [sampleSurvey]
+  // let sampleSurvey = new SurveyData(
+  //         'Favorite Fruit Survey',
+  //         'Which of the following is your favorite fruit?',
+  //         ["Apples", "Bananas", "Oranges"]
+  //       )
+  // let surveys = [sampleSurvey]
   ReactDOM.render(
-    <Main surveys={surveys} />,
+    <Main />,
     document.getElementById('root')
   );
 })
